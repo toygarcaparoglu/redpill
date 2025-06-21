@@ -5,19 +5,19 @@
   {{ $grouped := dict }}
   {{ range .Site.RegularPages }}
     {{ $date := .Date.Format "2006-01-02" }}
-    {{ $pages := index $grouped $date | default (slice) }}
-    {{ $pages = $pages | append . }}
-    {{ $grouped = merge $grouped (dict $date $pages) }}
+    {{ $existing := index $grouped $date | default (slice) }}
+    {{ $updated := $existing | append . }}
+    {{ $grouped = merge $grouped (dict $date $updated) }}
   {{ end }}
 
   {{ $dates := slice }}
-  {{ range $k, _ := $grouped }}
-    {{ $dates = $dates | append $k }}
+  {{ range $grouped }}
+    {{ $dates = $dates | append .Date }}
   {{ end }}
 
-  {{ $dates = sort $dates }}
-  {{ range $i := seq (sub (len $dates) 1) 0 -1 }}
-    {{ $date := index $dates $i }}
+  {{ $dates = sort (keys $grouped) | reverse }}
+  {{ range $dates }}
+    {{ $date := . }}
     {{ $pages := index $grouped $date }}
 
     <section>
