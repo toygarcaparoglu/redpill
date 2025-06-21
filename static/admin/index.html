@@ -8,36 +8,32 @@
     <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- Netlify Identity: E-posta onay & login yönlendirme -->
     <script>
-      if (window.netlifyIdentity) {
-        window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
-          }
-        });
+      window.netlifyIdentity && window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
 
-        // Eğer URL'de confirmation_token varsa, e-posta doğrula
-        window.addEventListener("DOMContentLoaded", () => {
-          const hash = window.location.hash;
-          if (hash.includes("confirmation_token")) {
-            const token = hash.split("confirmation_token=")[1];
-            if (token) {
-              window.netlifyIdentity.confirm(token)
-                .then(() => {
-                  alert("Email confirmed! Redirecting...");
-                  window.location.href = "/admin/";
-                })
-                .catch((err) => {
-                  console.error("Confirmation failed:", err);
-                  alert("Confirmation failed: " + err.message);
-                });
-            }
+      window.addEventListener("DOMContentLoaded", function () {
+        const hash = window.location.hash;
+        if (hash.includes("confirmation_token")) {
+          const token = hash.split("confirmation_token=")[1];
+          if (window.netlifyIdentity && token) {
+            window.netlifyIdentity.confirm(token)
+              .then(() => {
+                alert("Email confirmed! Redirecting...");
+                window.location.href = "/admin/";
+              })
+              .catch((err) => {
+                console.error("Confirmation failed:", err);
+                alert("Confirmation failed: " + err.message);
+              });
           }
-        });
-      }
+        }
+      });
     </script>
 
     <!-- Netlify CMS -->

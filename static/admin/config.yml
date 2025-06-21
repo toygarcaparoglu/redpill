@@ -1,10 +1,6 @@
 backend:
-  name: github
-  repo: toygarcaparoglu/redpill
+  name: git-gateway
   branch: main
-  auth_scope: repo
-  base_url: https://debuggingme.netlify.app/.netlify/functions
-  auth_endpoint: auth
 
 media_folder: "static/uploads"
 public_folder: "/uploads"
@@ -16,12 +12,5 @@ collections:
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - label: "Başlık"
-        name: "title"
-        widget: "string"
-      - label: "Tarih"
-        name: "date"
-        widget: "datetime"
-      - label: "İçerik"
-        name: "body"
-        widget: "markdown"
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
