@@ -8,16 +8,31 @@
     <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- Netlify Identity: E-posta onay ve login yönlendirme -->
+    <!-- Netlify Identity: E-posta onay + login yönlendirme -->
     <script>
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
-          if (!user) {
-            window.netlifyIdentity.on("login", () => {
-              document.location.href = "/admin/";
-            });
+          const token = new URLSearchParams(window.location.hash.slice(1)).get("confirmation_token");
+
+          // E-posta doğrulama varsa ve giriş yapılmamışsa
+          if (token && !user) {
+            window.netlifyIdentity.confirm(token)
+              .then(() => {
+                window.netlifyIdentity.open(); // Login ekranını aç
+              })
+              .catch((err) => {
+                console.error("Email confirmation failed:", err);
+              });
           }
+
+          // Login olunca admin'e yönlendir
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
         });
+
+        // Init başlat
+        window.netlifyIdentity.init();
       }
     </script>
 
