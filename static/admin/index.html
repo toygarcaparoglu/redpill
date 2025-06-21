@@ -8,21 +8,8 @@
     <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
+    <!-- Netlify Identity: E-posta onayı ve login yönlendirme -->
     <script>
-      const hashParams = new URLSearchParams(window.location.hash.substring(1));
-      const confirmationToken = hashParams.get("confirmation_token");
-
-      if (confirmationToken && window.netlifyIdentity) {
-        window.netlifyIdentity.confirm(confirmationToken)
-          .then(() => {
-            console.log("✅ Email confirmed");
-            window.location.href = "/admin/"; // Admin paneline yönlendir
-          })
-          .catch((err) => {
-            console.error("❌ Confirmation failed:", err);
-          });
-      }
-
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
           if (!user) {
@@ -32,7 +19,20 @@
           }
         });
 
-        window.netlifyIdentity.init();
+        // Eğer URL'de confirmation_token varsa, doğrulamayı tetikle
+        const hashParams = new URLSearchParams(window.location.hash.substring(1));
+        const confirmationToken = hashParams.get("confirmation_token");
+
+        if (confirmationToken) {
+          window.netlifyIdentity.confirm(confirmationToken)
+            .then(() => {
+              console.log("✅ Email confirmed");
+              window.location.href = "/admin/";
+            })
+            .catch((err) => {
+              console.error("❌ Confirmation failed:", err);
+            });
+        }
       }
     </script>
 
