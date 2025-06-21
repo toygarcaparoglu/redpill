@@ -14,7 +14,7 @@
   {{- range $k, $_ := $grouped }}
     {{- $dates = $dates | append $k -}}
   {{- end -}}
-  {{- $dates = sort $dates "desc" -}}
+  {{- $dates = sort $dates | reverse -}} <!-- HATA BURADA DÜZELTİLDİ -->
 
   {{- range $dates }}
     {{- $pages := index $grouped . }}
