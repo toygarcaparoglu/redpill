@@ -1,0 +1,9 @@
+baseURL = "http://example.com/"
+languageCode = "tr"
+title = "RedPill"
+theme = "hugo-theme-void"
+enableGitInfo = true
+
+[params]
+  author = "Toygar"
+  description = "Matrix evrenine hoş geldin!"
