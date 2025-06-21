@@ -1,26 +1,28 @@
+<!-- Meta -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ printf "%s | %s" .Title site.Title }}{{ end }}</title>
+
 <!-- Tailwind CSS -->
 {{ $css := resources.Get "css/style.css" }}
-{{ $styles := $css | resources.Minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen" integrity="{{ $styles.Data.Integrity }}">
+{{ $opts := dict "minify" true }}
+{{ $styles := $css | resources.ToCSS | resources.PostCSS | resources.Minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous">
 
-<!-- Code Highlighting Support - Light Theme -->
+<!-- Code Highlighting - Light Theme -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
 
-<!-- Initialize Code Highlighting with Light Theme -->
 <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
+  document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('pre code').forEach((el) => {
       hljs.highlightElement(el);
-      // Ensure light theme is always applied
-      setTimeout(() => {
-        el.style.backgroundColor = 'transparent';
-        el.parentElement.style.backgroundColor = '#ffffff';
-      }, 10);
+      el.style.backgroundColor = 'transparent';
+      el.parentElement.style.backgroundColor = '#ffffff';
     });
   });
 </script>
 
-<!-- Responsive Font Support -->
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
