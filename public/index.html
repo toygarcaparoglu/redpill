@@ -2,25 +2,8 @@
 <html lang="en-us" dir="ltr" class="h-full">
 <head>
 	<meta name="generator" content="Hugo 0.147.8"><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>RedPill Site</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-
-<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg" />
-<link rel="shortcut icon" href="/favicon/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
-<link rel="manifest" href="/favicon/site.webmanifest" />
-
-
-
-
-
-<link rel="stylesheet" href="/css/style.min.b5fece9e2cbcfd48f4f9b3899d395b906b52021e9f44b190b2f17b2b4bc9a057.css" media="screen" integrity="sha256-tf7Oniy8/Uj0&#43;bOJnTlbkGtSAh6fRLGQsvF7K0vJoFc=">
+  
+<link rel="stylesheet" href="/css/style.css" media="screen">
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css">
@@ -28,14 +11,11 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded', (event) => {
-    document.querySelectorAll('pre code').forEach((el) => {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('pre code').forEach(el => {
       hljs.highlightElement(el);
-      
-      setTimeout(() => {
-        el.style.backgroundColor = 'transparent';
-        el.parentElement.style.backgroundColor = '#ffffff';
-      }, 10);
+      el.style.backgroundColor = 'transparent';
+      el.parentElement.style.backgroundColor = '#ffffff';
     });
   });
 </script>
@@ -43,144 +23,6 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-
-
-      <script src="/js/main.js"></script>
-
-
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body);"></script>
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    
-    renderMathInElement(document.body, {
-      delimiters: [
-        {left: "$$", right: "$$", display: true},
-        {left: "$", right: "$", display: false}
-      ],
-      throwOnError: false
-    });
-    
-    
-    document.querySelectorAll('pre code').forEach(function(codeBlock) {
-      
-      let language = '';
-      codeBlock.className.split(' ').forEach(function(cls) {
-        if (cls.startsWith('language-')) {
-          language = cls.substring(9);
-        }
-      });
-      
-      
-      const pre = codeBlock.parentNode;
-      const wrapper = pre.parentNode;
-      
-      
-      const container = document.createElement('div');
-      container.className = 'code-block-container';
-      container.style.backgroundColor = '#ffffff';
-      
-      
-      const header = document.createElement('div');
-      header.className = 'code-block-header';
-      
-      
-      if (language) {
-        const langLabel = document.createElement('span');
-        langLabel.className = 'code-language-label';
-        langLabel.textContent = language.toUpperCase();
-        header.appendChild(langLabel);
-      }
-      
-      
-      const copyButton = document.createElement('button');
-      copyButton.className = 'copy-button';
-      copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
-      
-      copyButton.addEventListener('click', function() {
-        
-        const code = codeBlock.textContent;
-        
-        
-        navigator.clipboard.writeText(code).then(function() {
-          
-          copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Copied!';
-          
-          
-          setTimeout(function() {
-            copyButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg> Copy';
-          }, 2000);
-        });
-      });
-      
-      header.appendChild(copyButton);
-      
-      
-      if (pre.parentNode) {
-        pre.parentNode.removeChild(pre);
-      }
-      
-      
-      pre.style.backgroundColor = '#ffffff';
-      codeBlock.style.backgroundColor = '#ffffff';
-      
-      
-      container.appendChild(header);
-      container.appendChild(pre);
-      
-      
-      wrapper.appendChild(container);
-      
-      
-      hljs.highlightElement(codeBlock);
-      
-      
-      setTimeout(() => {
-        pre.style.backgroundColor = '#ffffff';
-        codeBlock.style.backgroundColor = '#ffffff';
-      }, 50);
-    });
-  });
-</script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    
-    const footnoteBacklinks = document.querySelectorAll('.footnote-backref');
-    
-    footnoteBacklinks.forEach(function(backlink) {
-      backlink.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        
-        const href = backlink.getAttribute('href');
-        
-        if (href) {
-          
-          const target = document.querySelector(href);
-          
-          if (target) {
-            
-            target.scrollIntoView({ behavior: 'smooth' });
-            
-            
-            target.classList.add('footnote-highlight');
-            setTimeout(function() {
-              target.classList.remove('footnote-highlight');
-            }, 2000);
-          }
-        }
-      });
-    });
-  });
-</script>
-
 
 </head>
 <body class="flex flex-col bg-gray-50 font-bilingual">
