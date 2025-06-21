@@ -8,30 +8,30 @@
     <!-- Netlify Identity Widget -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
-    <!-- Netlify Identity: E-posta onay + login yönlendirme -->
     <script>
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const confirmationToken = hashParams.get("confirmation_token");
+
+      if (confirmationToken && window.netlifyIdentity) {
+        window.netlifyIdentity.confirm(confirmationToken)
+          .then(() => {
+            console.log("✅ Email confirmed");
+            window.location.href = "/admin/"; // Admin paneline yönlendir
+          })
+          .catch((err) => {
+            console.error("❌ Confirmation failed:", err);
+          });
+      }
+
       if (window.netlifyIdentity) {
         window.netlifyIdentity.on("init", (user) => {
-          const token = new URLSearchParams(window.location.hash.slice(1)).get("confirmation_token");
-
-          // E-posta doğrulama varsa ve giriş yapılmamışsa
-          if (token && !user) {
-            window.netlifyIdentity.confirm(token)
-              .then(() => {
-                window.netlifyIdentity.open(); // Login ekranını aç
-              })
-              .catch((err) => {
-                console.error("Email confirmation failed:", err);
-              });
+          if (!user) {
+            window.netlifyIdentity.on("login", () => {
+              document.location.href = "/admin/";
+            });
           }
-
-          // Login olunca admin'e yönlendir
-          window.netlifyIdentity.on("login", () => {
-            document.location.href = "/admin/";
-          });
         });
 
-        // Init başlat
         window.netlifyIdentity.init();
       }
     </script>
