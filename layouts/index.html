@@ -10,10 +10,17 @@
     {{- $grouped = merge $grouped (dict $date $pages) -}}
   {{- end -}}
 
-  {{- range $key, $pages := sort $grouped "desc" }}
+  {{- $dates := slice -}}
+  {{- range $k, $_ := $grouped }}
+    {{- $dates = $dates | append $k -}}
+  {{- end -}}
+  {{- $dates = sort $dates "desc" -}}
+
+  {{- range $dates }}
+    {{- $pages := index $grouped . }}
     <section>
       <h2 class="text-xl font-semibold text-gray-600 mb-2 border-b pb-1">
-        {{ $key }}
+        {{ . }}
       </h2>
 
       <ul class="space-y-2 list-disc list-inside text-gray-800">
