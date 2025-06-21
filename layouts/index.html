@@ -12,11 +12,12 @@
 
   {{/* Get the keys from the map and then sort them */}}
   {{ $dates := slice }}
-  {{ range $key, $_ := $grouped }} {{/* Iterate over keys of the map */}}
+  {{ range $key, $_ := $grouped }}
     {{ $dates = $dates | append $key }}
   {{ end }}
 
-  {{ $dates = sort $dates | reverse }} {{/* Now sort the slice of keys */}}
+  {{ $dates = sort $dates }} {{/* Sort in ascending order first */}}
+  {{ $dates = $dates.Reverse }} {{/* Apply reverse as a method on the sorted slice */}}
 
   {{ range $dates }}
     {{ $date := . }}
