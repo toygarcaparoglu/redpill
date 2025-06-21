@@ -2,11 +2,11 @@
 <main class="max-w-3xl mx-auto px-4 py-12 space-y-10 font-sans">
   <h1 class="text-4xl font-bold text-gray-900 mb-6">📚 Blog Yazıları</h1>
 
-  {{ $posts := .Site.RegularPages | where "Section" "posts" | sort "Date" "desc" | groupByDate "2006-01-02" }}
+  {{ $posts := .Site.RegularPages | where "Section" "posts" | sort "Date" "desc" | groupBy "Date.Format" "2006-01-02" }}
   {{ range $posts }}
     <section>
       <h2 class="text-xl font-semibold text-gray-600 mb-2 border-b pb-1">
-        {{ .Key | time.Format "02 January 2006" }}
+        {{ .Key }}
       </h2>
 
       <ul class="space-y-2 list-disc list-inside text-gray-800">
