@@ -10,12 +10,14 @@
     {{ $grouped = merge $grouped (dict $date $updated) }}
   {{ end }}
 
+  {{/* Get the keys from the map and then sort them */}}
   {{ $dates := slice }}
-  {{ range $grouped }}
-    {{ $dates = $dates | append .Date }}
+  {{ range $key, $_ := $grouped }} {{/* Iterate over keys of the map */}}
+    {{ $dates = $dates | append $key }}
   {{ end }}
 
-  {{ $dates = sort (keys $grouped) | reverse }}
+  {{ $dates = sort $dates | reverse }} {{/* Now sort the slice of keys */}}
+
   {{ range $dates }}
     {{ $date := . }}
     {{ $pages := index $grouped $date }}
